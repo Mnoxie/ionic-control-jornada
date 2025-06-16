@@ -1,0 +1,35 @@
+<ion-content class="login-content">
+  <div class="login-container">
+    <h1 class="login-title">Login</h1>
+
+    <ion-item class="custom-item">
+      <ion-input 
+        [(ngModel)]="email" 
+        type="email" 
+        aria-label="Correo electrónico" 
+        placeholder="Email">
+      </ion-input>
+    </ion-item>
+
+    <ion-item class="custom-item">
+      <ion-input 
+        [(ngModel)]="password" 
+        type="password" 
+        aria-label="Contraseña" 
+        placeholder="Contraseña">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+
+    <ion-button 
+  id="present-alert" 
+  (click)="login()" 
+  class="btn-login"
+  [attr.tabindex]="isLoggingIn ? '-1' : '0'"
+  [disabled]="isLoggingIn">
+  Iniciar sesión
+</ion-button>
+
+    <p class="forgot-password"><a routerLink="/recover">¿Olvidó la contraseña?</a></p>
+  </div>
+</ion-content>

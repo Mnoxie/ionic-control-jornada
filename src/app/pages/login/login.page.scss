@@ -1,0 +1,89 @@
+.login-content {
+  --background: linear-gradient(135deg, #002366 70%, #ffffff 30%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Asegura que el contenido ocupe el 100% de la altura de la pantalla */
+  width: 100%; /* Asegura que el contenido ocupe el 100% de la pantalla */
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  background: transparent;
+  margin: 0 auto;
+}
+
+.login-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.custom-item {
+  width: 100%;
+  --background: transparent;
+  --color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+ion-input {
+  --placeholder-color: rgba(255, 255, 255, 0.6);
+  --color: white;
+  text-align: center; /* Centra el texto dentro de los campos */
+}
+
+.btn-login {
+  width: 100%;
+
+  color: #002366;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.forgot-password {
+  font-size: 14px;
+  margin-top: 15px;
+  color: white;
+}
+
+.forgot-password a {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .login-title {
+    font-size: 28px;
+  }
+
+  ion-item {
+    font-size: 16px;
+  }
+
+  .btn-login {
+    font-size: 14px;
+  }
+
+  .forgot-password {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    height: auto;
+    align-items: center;
+  }
+}

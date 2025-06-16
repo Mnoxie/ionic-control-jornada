@@ -1,0 +1,117 @@
+.home-content {
+  --background: linear-gradient(135deg, #002366 85%, #ffffff 30%); /* Fondo con gradiente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Asegura que ocupe toda la pantalla */
+  width: 100%;
+  background: var(--background); /* Aplica el fondo correctamente */
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  background: transparent; /* Mantiene el fondo transparente para el contenedor */
+  margin: 0 auto;
+  gap: 30px; /* Espaciado entre los elementos */
+}
+
+.home-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.clock {
+  font-size: 36px;
+  font-family: 'Courier New', Courier, monospace;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.attendance-buttons {
+  display: flex;
+  flex-direction: column; /* Los botones estarán apilados en móvil */
+  gap: 15px; /* Espacio entre los botones */
+  width: 100%;
+}
+
+.btn-home {
+  width: 100%;
+  background: #ffffff;
+  color: #002366;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px; /* Reduce el padding para hacer los botones más pequeños */
+  border-radius: 20px; /* Aumenta el border-radius para redondear más los botones */
+  font-size: 1px; /* Reduce el tamaño de la fuente para hacerlos más pequeños */
+  transition: all 0.3s ease; /* Transición suave para los cambios */
+}
+
+.btn-home:hover {
+  background-color: #002366; /* Color de fondo azul en hover */
+  color: #ffffff; /* Cambiar el color del texto en hover */
+}
+
+@media (min-width: 768px) {
+  .attendance-buttons {
+    flex-direction: row; /* Los botones estarán al lado en tabletas y PCs */
+    justify-content: space-between; /* Distribuye los botones a los lados */
+  }
+
+  .btn-home {
+    width: 48%; /* Hace que los botones ocupen el 48% del ancho */
+  }
+
+  .home-title {
+    font-size: 40px;
+  }
+
+  .clock {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 28px;
+  }
+
+  .clock {
+    font-size: 28px;
+  }
+
+  .btn-home {
+    font-size: 16px;
+  }
+
+}
+
+
+
+
+
+
+.extra-btn {
+  width: 50%;       /* En móviles, la mitad de la pantalla */
+  margin: 0 auto;   /* Centra el botón horizontalmente */
+  color: #e1e5eb;
+  
+  
+}
+
+@media (min-width: 768px) {
+  /* En pantallas más anchas, tus otros botones ocupan ~48% del ancho,
+     si deseas que "Hora Extra" sea la mitad de 48%, entonces:
+  */
+  .extra-btn {
+    width: 24%; 
+  }
+}

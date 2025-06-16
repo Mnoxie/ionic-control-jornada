@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Botón para abrir el menú -->
+    <ion-buttons slot="end">
+      <ion-button (click)="openMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Administración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <form [formGroup]="usuario" (ngSubmit)="registrar()">
+      <ion-item class="custom-item">
+        <ion-input formControlName="rut" type="text" label="RUT" labelPlacement="stacked" placeholder="Ingrese su RUT con guion"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="nombre" type="text" label="Nombre" labelPlacement="stacked" placeholder="Ingrese su nombre"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="apellido" type="text" label="Apellido" labelPlacement="stacked" placeholder="Ingrese su apellido"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="email" label="Email" type="email" labelPlacement="stacked" placeholder="Ingrese su correo electrónico"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="password" type="password" label="Contraseña" labelPlacement="stacked" placeholder="Ingrese contraseña">
+          <ion-input-password-toggle slot="end" color="light"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="repeat_password" type="password" label="Repetir Contraseña" labelPlacement="stacked" placeholder="Repita la contraseña" [ngClass]="{'invalid': isPasswordMismatch()}">
+          <ion-input-password-toggle slot="end" color="light"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="isPasswordMismatch()" class="error-message">
+        <p>Las contraseñas no coinciden.</p>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-select formControlName="sucursal" label="Sucursal" label-placement="stacked" placeholder="Seleccionar">
+          <ion-select-option>Puente Alto</ion-select-option>
+          <ion-select-option>Cerro Navia</ion-select-option> 
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo de usuario</ion-label>
+        <ion-radio-group formControlName="tipo_usuario">
+          <ion-radio value="colaborador">Colaborador</ion-radio>
+          <ion-radio value="administrador">Administrador</ion-radio>
+        </ion-radio-group>
+      </ion-item>
+
+      <ion-button [disabled]="botonModificar || usuario.invalid || isPasswordMismatch()" fill="outline" (click)="modificar()" size="block" color="danger">MODIFICAR</ion-button>
+      <ion-button type="reset" size="block" fill="outline" color="secondary">LIMPIAR</ion-button>
+    </form>
+
+    <div *ngIf="usuarios.length > 0; else noHayUsuarios">
+      <ion-list *ngFor="let usuario of usuarios">
+        <ion-item-sliding>
+          <ion-item-options side="start">
+            <ion-item-option (click)="buscar(usuario)" color="warning">Buscar</ion-item-option>
+          </ion-item-options>
+          <ion-item>{{usuario.rut}} - {{usuario.nombre}}</ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="eliminar(usuario.rut)" color="danger">Eliminar</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <ng-template #noHayUsuarios>
+      <h1>No hay usuarios</h1>
+    </ng-template>
+  </ion-card>
+</ion-content>

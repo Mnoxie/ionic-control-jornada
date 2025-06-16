@@ -1,0 +1,7 @@
+{
+  "name": "jornada_laboral",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

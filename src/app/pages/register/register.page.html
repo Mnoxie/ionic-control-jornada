@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Botón para abrir el menú -->
+    <ion-buttons slot="end">
+      <ion-button (click)="openMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Registro de Empleados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="register-content">
+  <div class="register-container">
+    <h1 class="register-title">Registro</h1>
+
+    <form [formGroup]="usuario" (ngSubmit)="userRegister()">
+      <ion-item class="custom-item">
+        <ion-input formControlName="rut" type="text" label="RUT" labelPlacement="stacked" placeholder="Ingrese su RUT con guion"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="nombre" type="text" label="Nombre" labelPlacement="stacked" placeholder="Ingrese su nombre"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="apellido" type="text" label="Apellido" labelPlacement="stacked" placeholder="Ingrese su apellido"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="email" label="Email" type="email" labelPlacement="stacked" placeholder="Ingrese su correo electrónico"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="password" type="password" label="Contraseña" labelPlacement="stacked" placeholder="Ingrese contraseña">
+          <ion-input-password-toggle slot="end" color="light"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <ion-item class="custom-item">
+        <ion-input formControlName="repeat_password" type="password" label="Repetir Contraseña" labelPlacement="stacked" placeholder="Repita la contraseña" [ngClass]="{'invalid': isPasswordMismatch()}">
+          <ion-input-password-toggle slot="end" color="light"></ion-input-password-toggle>
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="isPasswordMismatch()" class="error-message">
+        <p>Las contraseñas no coinciden.</p>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-select formControlName="sucursal" label="Sucursal" label-placement="stacked" placeholder="Seleccionar">
+          <ion-select-option>Puente Alto</ion-select-option>
+          <ion-select-option>Cerro Navia</ion-select-option> 
+        </ion-select>
+      </ion-item>
+
+      <ion-button id="present-alert" [disabled]="usuario.invalid || isPasswordMismatch()" type="submit" class="btn-login" expand="block">Registrar</ion-button>
+
+      <ion-alert trigger="present-alert" header="¡Bienvenido a TravelSt!" subHeader="Comienza tu aventura con nosotros" message="Tu cuenta ha sido creada exitosamente. Ya puedes empezar a explorar y planificar tu próximo viaje." [buttons]="alertButtons"></ion-alert>
+    </form>
+  </div>
+</ion-content>

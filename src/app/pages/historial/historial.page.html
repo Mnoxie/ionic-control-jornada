@@ -1,0 +1,69 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <!-- Botón para abrir el menú -->
+      <ion-buttons slot="end">
+        <ion-button (click)="openMenu()">
+          <ion-icon name="menu"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Historial de Asistencia</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-menu side="end" menuId="main-menu" contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/administracion" routerDirection="root">
+          <ion-label>Administración de Usuarios</ion-label>
+        </ion-item>
+        <ion-item routerLink="/historial" routerDirection="root">
+          <ion-label>Historial de Asistencia</ion-label>
+        </ion-item>
+        <ion-item routerLink="/registro" routerDirection="root">
+          <ion-label>Registro de Empleados</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-content id="main-content">
+    <div class="container">
+      <!-- Buscador -->
+      <ion-searchbar
+        placeholder="Buscar por nombre o RUT"
+        debounce="500"
+        (ionInput)="onSearch($event)">
+      </ion-searchbar>
+
+      <!-- Historial de asistencia -->
+      <div *ngIf="filteredHistorial.length > 0">
+        <ion-list>
+          <ion-item *ngFor="let item of filteredHistorial">
+            <ion-label>
+              <h3>{{ item.nombre_empleado }} {{ item.apellido_empleado }}</h3>
+              <p>
+                <strong>RUT:</strong> {{ item.empleado_id }}<br>
+                <strong>Fecha Inicio:</strong> {{ item.fecha_inicio.toDate() | date: 'short' }}<br>
+                <strong>Fecha Fin:</strong> {{ item.fecha_fin ? (item.fecha_fin.toDate() | date: 'short') : 'N/A' }}<br>
+                <strong>Estado:</strong> {{ item.estado }}<br>
+                <strong>Tiempo:</strong> {{ item.tiempo_jornada }}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <!-- Mensaje si no hay resultados -->
+      <div *ngIf="filteredHistorial.length === 0" class="no-results">
+        <p>No se encontraron resultados. Ajusta los filtros o realiza otra búsqueda.</p>
+      </div>
+    </div>
+  </ion-content>
+</ion-app>
