@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MenuController } from '@ionic/angular'; // Importa MenuController
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-historial',
@@ -65,6 +68,32 @@ export class HistorialPage implements OnInit {
       return matchesQuery && matchesDateRange; // Filtrar por nombre y fechas
     });
   }
+
+  descargarExcel() {
+  const data = this.filteredHistorial.map(item => {
+    const fechaInicio = new Date(item.fecha_inicio.seconds * 1000);
+    const fechaFin = item.fecha_fin ? new Date(item.fecha_fin.seconds * 1000) : null;
+
+    return {
+      'Nombre': item.nombre_empleado,
+      'Apellido': item.apellido_empleado,
+      'RUT': item.empleado_id,
+      'Fecha Inicio': fechaInicio.toLocaleString(),
+      'Fecha Fin': fechaFin ? fechaFin.toLocaleString() : 'N/A',
+      'Estado': item.estado,
+      'Tiempo Jornada': item.tiempo_jornada
+    };
+  });
+
+  const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
+  const workbook: XLSX.WorkBook = { Sheets: { 'Historial': worksheet }, SheetNames: ['Historial'] };
+
+  const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+
+  const blob: Blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+  FileSaver.saveAs(blob, 'historial_asistencia.xlsx');
+}
+
 
   // Método para abrir el menú
   openMenu() {

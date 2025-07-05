@@ -35,12 +35,26 @@
 
   <ion-content id="main-content">
     <div class="container">
-      <!-- Buscador -->
-      <ion-searchbar
-        placeholder="Buscar por nombre o RUT"
-        debounce="500"
-        (ionInput)="onSearch($event)">
-      </ion-searchbar>
+      <!-- Buscador y botón descargar -->
+      <ion-row class="ion-align-items-center ion-justify-content-between">
+        <ion-col size="9">
+          <ion-searchbar
+            placeholder="Buscar por nombre o RUT"
+            debounce="500"
+            (ionInput)="onSearch($event)">
+          </ion-searchbar>
+        </ion-col>
+        <ion-col size="3" class="ion-text-right">
+          <ion-button
+            color="success"
+            size="small"
+            (click)="descargarExcel()"
+            style="--padding-start: 6px; --padding-end: 6px;">
+            <ion-icon name="download-outline" slot="start"></ion-icon>
+            <ion-label class="boton-descarga-label">Descargar</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
 
       <!-- Historial de asistencia -->
       <div *ngIf="filteredHistorial.length > 0">
